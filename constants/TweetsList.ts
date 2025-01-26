@@ -1,9 +1,12 @@
+import { ImageSourcePropType } from "react-native";
+
+
 type TweetsListProps = {
   id: number;
   date: string;
   username: string;
   tweet: string;
-  avatar: string;
+  avatar: ImageSourcePropType ;
 };
 
 const TweetsList : TweetsListProps[] = [
