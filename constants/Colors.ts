@@ -28,6 +28,7 @@ export const Colors = {
   white: "#ffffff",
   darkblue: "#4f34ff",
   blue: "#9ad4ff",
+  grey: "#e2e2e2",
 };
 
 // export const colors = {

@@ -1,32 +1,40 @@
-import { View, Text, StyleSheet, Image } from "react-native";
-import tweets from "../../constants/TweetsList";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  ImageSourcePropType,
+  ScrollView,
+} from "react-native";
+import initialTweets from "../../constants/TweetsList";
 
 import Tweet from "@/components/Tweet";
 import { Colors } from "@/constants/Colors";
+import TweetBox from "@/components/TweetBox";
+import { useState } from "react";
+import { format } from "date-fns";
+
+type TweeProps = {
+  id: number;
+  date: string;
+  username: string;
+  tweet: string;
+  avatar: ImageSourcePropType;
+};
 
 export default function HomeScreen() {
+  const [tweets, setTweets] = useState<TweeProps[]>(initialTweets);
+  const addTweet = (newTweet: TweeProps) => {
+    setTweets([newTweet, ...tweets]);
+  };
   return (
     <View style={styles.container}>
-      <Tweet
-        date={tweets[0].date}
-        avatar={tweets[0].avatar}
-        tweet={tweets[0].tweet}
-        username={tweets[0].username}
-      />
-
-      <Tweet
-        date={tweets[1].date}
-        avatar={tweets[1].avatar}
-        tweet={tweets[1].tweet}
-        username={tweets[1].username}
-      />
-
-      <Tweet
-        date={tweets[2].date}
-        avatar={tweets[2].avatar}
-        tweet={tweets[2].tweet}
-        username={tweets[2].username}
-      />
+      <TweetBox addTweet={addTweet} />
+      <ScrollView contentContainerStyle={styles.scrolltweets}>
+        {tweets.map((tweet) => (
+          <Tweet key={tweet.id} {...tweet} />
+        ))}
+      </ScrollView>
     </View>
   );
 }
@@ -35,12 +43,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    // alignItems: "center",
-    backgroundColor: Colors.lightblue,
+    backgroundColor: Colors.grey,
   },
-  title: {
-    fontSize: 30,
-    fontWeight: "bold",
-    // color: "red",
+  scrolltweets: {
+    paddingBottom: 16,
   },
 });
