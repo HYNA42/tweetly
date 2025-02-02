@@ -4,7 +4,7 @@ import { Colors } from "../constants/Colors";
 export default function TestScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.test}>Ceci est un Test </Text>
+      <Text style={styles.test}>Ceci est un Test ww</Text>
     </View>
   );
 }

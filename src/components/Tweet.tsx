@@ -4,6 +4,8 @@ import {
   StyleSheet,
   Image,
   ImageSourcePropType,
+  Alert,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { Colors } from "@/src/constants/Colors";
 
@@ -16,21 +18,37 @@ type TweeProps = {
 
 const Tweet = ({ date, tweet, username, avatar }: TweeProps) => {
   return (
-    <View style={styles.tweetContainer}>
-      <View style={styles.left}>
-        <Image source={avatar} style={styles.avatar} />
-      </View>
+    <TouchableWithoutFeedback
+      onPress={() =>
+        Alert.alert(
+          "Informations du tweet",
+          tweet,
+          [
+          {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel",
+          },
+          { text: "OK", onPress: () => console.log("OK Pressed") },
+        ])
+      }
+    >
+      <View style={styles.tweetContainer}>
+        <View style={styles.left}>
+          <Image source={avatar} style={styles.avatar} />
+        </View>
 
-      <View style={styles.right}>
-        <View style={styles.top}>
-          <Text style={styles.date}>{date}</Text>
-          <Text style={styles.username}>@{username}</Text>
-        </View>
-        <View style={styles.bottom}>
-          <Text style={styles.tweet}>{tweet}</Text>
+        <View style={styles.right}>
+          <View style={styles.top}>
+            <Text style={styles.date}>{date}</Text>
+            <Text style={styles.username}>@{username}</Text>
+          </View>
+          <View style={styles.bottom}>
+            <Text style={styles.tweet}>{tweet}</Text>
+          </View>
         </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -43,7 +61,6 @@ const styles = StyleSheet.create({
     marginBottom: 4,
     padding: 4,
   }, //Tweet
-  // meta: {}, //Meta informations
   left: {
     // borderWidth: 2,
     // borderColor: "red",

@@ -6,9 +6,11 @@ import {
   TextInput,
   Button,
   Keyboard,
+  TouchableOpacity,
 } from "react-native";
 import { Colors } from "@/src/constants/Colors";
 import { format } from "date-fns";
+import { Icon } from "react-native-elements";
 
 const TweetBox = ({ addTweet }: any) => {
   const [value, onChangeText] = useState<string>("");
@@ -28,7 +30,7 @@ const TweetBox = ({ addTweet }: any) => {
   };
   return (
     <View style={styles.tweetbox}>
-      <Text style={styles.count}> {value.length} / 140 </Text>
+      <Text> {value.length} / 140 </Text>
       <TextInput
         editable
         maxLength={140} //140
@@ -36,13 +38,14 @@ const TweetBox = ({ addTweet }: any) => {
         onChangeText={(text) => onChangeText(text)}
         value={value}
         style={styles.textInput}
+        placeholder="Ajouter un nouveau tweet ...."
       />
-      <Button
-        onPress={handleAddTweet}
-        title="Ajouter un nouveau tweet"
-        color={Colors.primary}
-        accessibilityLabel="Learn more about this purple button"
-      />
+      <TouchableOpacity onPress={handleAddTweet}>
+        <View style={styles.addTweetBtnBloc}>
+          <Icon name="add-circle" color={Colors.white} size={30} />
+          <Text style={styles.adTweetText}>Envoyer</Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -55,7 +58,20 @@ const styles = StyleSheet.create({
     paddingLeft: 8,
     paddingRight: 8,
   },
-  count: {},
+  addTweetBtnBloc: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: Colors.primary,
+    borderRadius: 8,
+    marginTop: 4,
+    paddingVertical: 4,
+  },
+  adTweetText: {
+    color: Colors.white,
+    fontSize: 15,
+    marginLeft: 5,
+  },
   textInput: {
     height: 45,
     borderWidth: 1,
