@@ -1,18 +1,14 @@
 import {
   View,
-  Text,
   StyleSheet,
-  Image,
   ImageSourcePropType,
   ScrollView,
 } from "react-native";
-import initialTweets from "../../constants/TweetsList";
-
-import Tweet from "@/components/Tweet";
-import { Colors } from "@/constants/Colors";
-import TweetBox from "@/components/TweetBox";
+import initialTweets from "@/src/constants/TweetsList";
+import Tweet from "@/src/components/Tweet";
+import { Colors } from "@/src/constants/Colors";
+import TweetBox from "@/src/components/TweetBox";
 import { useState } from "react";
-import { format } from "date-fns";
 
 type TweeProps = {
   id: number;

@@ -1,6 +1,13 @@
 import { useState } from "react";
-import { View, Text, StyleSheet, TextInput, Button,Keyboard } from "react-native";
-import { Colors } from "@/constants/Colors";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  Button,
+  Keyboard,
+} from "react-native";
+import { Colors } from "@/src/constants/Colors";
 import { format } from "date-fns";
 
 const TweetBox = ({ addTweet }: any) => {
@@ -10,14 +17,14 @@ const TweetBox = ({ addTweet }: any) => {
       id: Date.now(),
       date: format(new Date(), "dd/MM/yyyy"),
       // date: format(new Date(), "yyyy-MM-dd"),
-      username:'Hyna',
+      username: "Hyna",
       tweet: value,
-      avatar: require("../assets/logos/default.jpg"),
+      avatar: require("../../assets/logos/default.jpg"),
     };
 
     await addTweet(newTweet);
     onChangeText("");
-    Keyboard.dismiss()// Réinitialise le champ
+    Keyboard.dismiss(); // Réinitialise le champ
   };
   return (
     <View style={styles.tweetbox}>
@@ -55,6 +62,6 @@ const styles = StyleSheet.create({
     borderColor: Colors.primary,
     borderRadius: 5,
     padding: 8,
-    backgroundColor:Colors.white,
+    backgroundColor: Colors.white,
   },
 });

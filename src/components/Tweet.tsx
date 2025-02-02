@@ -5,7 +5,7 @@ import {
   Image,
   ImageSourcePropType,
 } from "react-native";
-import { Colors } from "@/constants/Colors";
+import { Colors } from "@/src/constants/Colors";
 
 type TweeProps = {
   date: string;
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: Colors.blue,
     marginBottom: 4,
-    padding:4
+    padding: 4,
   }, //Tweet
   // meta: {}, //Meta informations
   left: {
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   },
   right: {
     flex: 1,
-    paddingLeft:8
+    paddingLeft: 8,
     // borderWidth: 2,
     // borderColor: "green",
   },
@@ -62,11 +62,10 @@ const styles = StyleSheet.create({
   bottom: {},
   date: { marginRight: 10 },
   username: {
-    color:Colors.primary
+    color: Colors.primary,
   },
   tweet: {
-    fontWeight: 'bold',
-    
+    fontWeight: "bold",
   },
 });
 
