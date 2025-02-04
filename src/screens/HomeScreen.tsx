@@ -4,11 +4,16 @@ import {
   ImageSourcePropType,
   ScrollView,
 } from "react-native";
-import initialTweets from "@/src/constants/TweetsList";
+
 import Tweet from "@/src/components/Tweet";
 import { Colors } from "@/src/constants/Colors";
 import TweetBox from "@/src/components/TweetBox";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {
+  getAllTweetsFromStorage,
+  updateTweetsInLocalStorage,
+} from "../hooks/storage";
+import { nanoid } from "nanoid";
 
 type TweeProps = {
   id: number;
@@ -19,10 +24,27 @@ type TweeProps = {
 };
 
 export default function HomeScreen() {
-  const [tweets, setTweets] = useState<TweeProps[]>(initialTweets);
-  const addTweet = (newTweet: TweeProps) => {
-    setTweets([newTweet, ...tweets]);
+  const [tweets, setTweets] = useState<TweeProps[]>([]);
+
+  // 🟢 Charger les tweets stockés au démarrage
+  useEffect(() => {
+    const fetchData = async () => {
+      const storedTweets = await getAllTweetsFromStorage();
+      if (storedTweets) setTweets(storedTweets);
+      console.log("tweets", tweets);
+    };
+    fetchData();
+  }, []);
+
+  // 🟢 Ajouter un tweet et le sauvegarder dans AsyncStorage
+
+  const addTweet = async (newTweet: TweeProps) => {
+    const tweetWithid = { ...newTweet,id: Date.now() };
+    const updateTweet = [tweetWithid, ...tweets];
+    setTweets(updateTweet);
+    await updateTweetsInLocalStorage(newTweet);
   };
+
   return (
     <View style={styles.container}>
       <TweetBox addTweet={addTweet} />
