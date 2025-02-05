@@ -13,10 +13,11 @@ import {
   getAllTweetsFromStorage,
   updateTweetsInLocalStorage,
 } from "../hooks/storage";
-import { nanoid } from "nanoid";
+
+import uuid from "react-native-uuid";
 
 type TweeProps = {
-  id: number;
+  id: string;
   date: string;
   username: string;
   tweet: string;
@@ -39,7 +40,7 @@ export default function HomeScreen() {
   // 🟢 Ajouter un tweet et le sauvegarder dans AsyncStorage
 
   const addTweet = async (newTweet: TweeProps) => {
-    const tweetWithid = { ...newTweet,id: Date.now() };
+    const tweetWithid = { ...newTweet, id: uuid.v4() as string };
     const updateTweet = [tweetWithid, ...tweets];
     setTweets(updateTweet);
     await updateTweetsInLocalStorage(newTweet);
@@ -48,6 +49,7 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <TweetBox addTweet={addTweet} />
+
       <ScrollView contentContainerStyle={styles.scrolltweets}>
         {tweets.map((tweet) => (
           <Tweet key={tweet.id} {...tweet} />

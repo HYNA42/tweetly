@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import TweetsList from "../constants/TweetsList";
 
 export const getAllTweetsFromStorage = async () => {
@@ -18,5 +19,14 @@ export const updateTweetsInLocalStorage = async (tweet: any) => {
     return AsyncStorage.setItem("tweets", JSON.stringify(newTweets));
   } catch (err) {
     console.error("Async storage Error", err);
+  }
+};
+
+export const clearStorage = async () => {
+  try {
+    await AsyncStorage.removeItem("tweets"); // 🟢 Supprime les tweets du stockage local
+    console.log("AsyncStorage cleared!");
+  } catch (err) {
+    console.error("Error clearing AsyncStorage:", err);
   }
 };
